@@ -8,16 +8,17 @@ import { ReplaySubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AccountService {
-  baseUrl = 'https://localhost:5001/api/';
+  // https://localhost:44308/api
+  baseUrl: string = 'https://localhost:5001/api/';
   private currentUserSource = new ReplaySubject<User | null>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient) { }
-
-  login(model: any) {
+  login(model: User) {
     return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(
       map((response: User) => {
         const user = response;
+      
         if(user) {
           localStorage.setItem('user', JSON.stringify(user));
           this.currentUserSource.next(user);
@@ -26,7 +27,7 @@ export class AccountService {
     )
   }
 
-  register(model: any) {
+  register(model: User) {
     return this.http.post<User>(this.baseUrl + 'account/register', model).pipe(
       map((user : User) => {
         if(user) {

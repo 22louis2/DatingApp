@@ -33,7 +33,7 @@ namespace API.Controllers
 
             if (thing == null) return NotFound();
 
-            return Ok(thing);
+            return thing;
         }
 
         [HttpGet("server-error")]
@@ -47,7 +47,7 @@ namespace API.Controllers
         }
 
         [HttpGet("bad-request")]
-        public ActionResult<string> GetBadRequest()
+        public ActionResult GetBadRequest()
         {
             return BadRequest("This was not a good request");
         }

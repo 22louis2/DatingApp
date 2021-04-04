@@ -1,5 +1,6 @@
 ﻿using API.Errors;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -27,6 +28,7 @@ namespace API.Middleware
             try
             {
                 await _next(context);
+                _logger.LogError(ReasonPhrases.GetReasonPhrase(context.Response.StatusCode));
             }
             catch (Exception ex)
             {
@@ -39,6 +41,7 @@ namespace API.Middleware
                     : new ApiException(context.Response.StatusCode, "Internal Server Error");
 
                 var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+            //    _logger.LogError(context.Response.ToString());
 
                 var json = JsonSerializer.Serialize(response, options);
 

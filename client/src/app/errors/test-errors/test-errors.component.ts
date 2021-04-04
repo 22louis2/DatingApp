@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./test-errors.component.css']
 })
 export class TestErrorsComponent implements OnInit {
+  // 'https://localhost:44308/api/';
   baseUrl = 'https://localhost:5001/api/';
   validationErrors: string[] = [];
 
