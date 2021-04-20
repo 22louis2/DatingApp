@@ -42,7 +42,7 @@ export class PhotoEditorComponent implements OnInit {
         if(p.isMain) p.isMain = false;
         if(p.id === photo.id) p.isMain = true;
       })
-    })
+    }) 
   }
 
   deletePhoto(photoId: number) {
