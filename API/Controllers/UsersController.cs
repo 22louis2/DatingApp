@@ -1,5 +1,4 @@
-﻿using API.Data;
-using API.DTOs;
+﻿using API.DTOs;
 using API.Entities;
 using API.Extensions;
 using API.Helpers;
@@ -8,11 +7,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -39,7 +35,7 @@ namespace API.Controllers
             userParams.CurrentUsername = User.GetUsername();
 
             if (string.IsNullOrEmpty(userParams.Gender))
-            userParams.Gender = gender == "male" ? "female" : "male";
+                userParams.Gender = gender == "male" ? "female" : "male";
 
             var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
 
@@ -86,9 +82,9 @@ namespace API.Controllers
             user.Photos.Add(photo);
 
             if (await _unitOfWork.Complete())
-            return CreatedAtRoute("GetUser", 
-                new { username = user.UserName }, 
-                _mapper.Map<PhotoDto>(photo));
+                return CreatedAtRoute("GetUser",
+                    new { username = user.UserName },
+                    _mapper.Map<PhotoDto>(photo));
 
             return BadRequest("Problem adding photo");
         }
@@ -130,7 +126,7 @@ namespace API.Controllers
 
             user.Photos.Remove(photo);
 
-            if (await _unitOfWork.Complete()) return Ok(); 
+            if (await _unitOfWork.Complete()) return Ok();
 
             return BadRequest("Failed to delete the photo");
         }

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace API.Interfaces
 {
-    public interface IUnitOfWork 
+    public interface IUnitOfWork
     {
         IUserRepository UserRepository { get; }
         IMessageRepository MessageRepository { get; }

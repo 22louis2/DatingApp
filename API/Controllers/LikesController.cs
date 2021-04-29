@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
@@ -7,6 +5,8 @@ using API.Helpers;
 using API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -37,8 +37,8 @@ namespace API.Controllers
 
             userLike = new UserLike
             {
-            SourceUserId = sourceUserId,
-            LikedUserId = likedUser.Id
+                SourceUserId = sourceUserId,
+                LikedUserId = likedUser.Id
             };
 
             sourceUser.LikedUsers.Add(userLike);

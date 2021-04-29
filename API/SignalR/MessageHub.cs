@@ -5,7 +5,6 @@ using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -76,14 +75,14 @@ namespace API.SignalR
 
             var group = await _unitOfWork.MessageRepository.GetMessageGroup(groupName);
 
-            if(group.Connections.Any(x => x.Username == recipient.UserName))
+            if (group.Connections.Any(x => x.Username == recipient.UserName))
             {
                 message.DateRead = DateTime.UtcNow;
             }
             else
             {
                 var connections = await _tracker.GetConnectionsForUser(recipient.UserName);
-                if(connections != null)
+                if (connections != null)
                 {
                     await _presenceHub.Clients.Clients(connections).SendAsync("NewMessageReceived",
                         new { username = sender.UserName, knownAs = sender.KnownAs });
@@ -101,9 +100,9 @@ namespace API.SignalR
         private async Task<Group> AddToGroup(string groupName)
         {
             var group = await _unitOfWork.MessageRepository.GetMessageGroup(groupName);
-            var connection = new Connection(Context.ConnectionId, Context.User.GetUsername()); 
+            var connection = new Connection(Context.ConnectionId, Context.User.GetUsername());
 
-            if(group == null)
+            if (group == null)
             {
                 group = new Group(groupName);
                 _unitOfWork.MessageRepository.AddGroup(group);

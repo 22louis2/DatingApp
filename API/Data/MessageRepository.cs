@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
 using API.Helpers;
@@ -9,6 +5,10 @@ using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace API.Data
 {
@@ -74,15 +74,15 @@ namespace API.Data
                 .AsQueryable();
 
             query = messageParams.Container switch
-                {
-                    "Inbox" => query.Where(u => u.RecipientUsername == messageParams.Username
-                        && u.RecipientDeleted == false),
-                    "Outbox" => query.Where(u => u.SenderUsername == messageParams.Username
-                        && u.SenderDeleted == false),
-                    _ => query.Where(u => u.RecipientUsername == messageParams.Username
-                        && u.RecipientDeleted == false
-                        && u.DateRead == null)
-                };
+            {
+                "Inbox" => query.Where(u => u.RecipientUsername == messageParams.Username
+                    && u.RecipientDeleted == false),
+                "Outbox" => query.Where(u => u.SenderUsername == messageParams.Username
+                    && u.SenderDeleted == false),
+                _ => query.Where(u => u.RecipientUsername == messageParams.Username
+                    && u.RecipientDeleted == false
+                    && u.DateRead == null)
+            };
 
             return await PagedList<MessageDto>.CreateAsync(query, messageParams.PageNumber, messageParams.PageSize);
         }

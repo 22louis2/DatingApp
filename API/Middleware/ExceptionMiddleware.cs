@@ -41,7 +41,7 @@ namespace API.Middleware
                     : new ApiException(context.Response.StatusCode, "Internal Server Error");
 
                 var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-            //    _logger.LogError(context.Response.ToString());
+                //    _logger.LogError(context.Response.ToString());
 
                 var json = JsonSerializer.Serialize(response, options);
 
