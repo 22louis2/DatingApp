@@ -1,5 +1,6 @@
 using API.Data;
 using API.Entities;
+using FacilityManagement.Services.API;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,7 @@ namespace API
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseUrls($"http://+:{HerokuDatabaseSetup.HostPort}");
                     webBuilder.UseStartup<Startup>();
                 });
     }
