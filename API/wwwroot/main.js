@@ -1336,6 +1336,7 @@ class ErrorInterceptor {
     }
     intercept(request, next) {
         return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["catchError"])((error) => {
+            console.log(error);
             if (error) {
                 console.log(error.status);
                 switch (error.status) {

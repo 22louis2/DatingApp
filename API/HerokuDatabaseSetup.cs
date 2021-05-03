@@ -23,7 +23,7 @@ namespace FacilityManagement.Services.API
         /// </summary>
         public static string HostPort =>
             IsDevelopment
-                ? "5000"
+                ? "5001"
                 : Environment.GetEnvironmentVariable("PORT");
 
 
