@@ -43,7 +43,7 @@ namespace API
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseUrls($"http://+:{HerokuDatabaseSetup.HostPort}");
+                    webBuilder.UseUrls($"http://+:{HerokuDatabaseSetup.HostPort}", $"https://+:{HerokuDatabaseSetup.HostPort}");
                     webBuilder.UseStartup<Startup>();
                 });
     }
